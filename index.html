@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoApp</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+    <!-- en tête -->
+    <nav>
+        <h3>TodoApp</h3>
+        <div>
+            <button onclick="show('load')">Charger</button>
+            <button onclick="show('save')">Sauvegarder</button>
+            <button onclick="show('about')">A propos</button>
+            <button onclick="show('history')">Historique</button>
+        </div>
+    </nav>
+
+    <!-- popup -->
+    <div class="popup">
+        <div id="history">
+            <button onclick="show('null')">Fermer</button>
+            <h2>Historique</h2>
+            <ul id="ul">
+            </ul>
+        </div>
+        <div id="save">
+            <button onclick="show('null')">Fermer</button>
+            <h2>Sauvegarde des taches</h2>
+            <input type="text" id="save_task">
+            <button onclick="saveTask()">Sauvegarder</button>
+        </div>
+        <div id="load">
+            <button onclick="show('null')">Fermer</button>
+            <h2>Charge une base de taches</h2>
+            <input type="file" id="load_task" accept=".json">
+        </div>
+        <div id="about">
+            <button onclick="show('null')">Fermer</button>
+            <h2>A propos</h2>
+            <p>TodoApp est une application web qui permet de planifier des taches.</p>     
+        </div>
+        <div id="add">
+            <button onclick="show('null')">Fermer</button>
+            <h2>Ajout d'une tache</h2>
+            <div>
+                <label>Nom de la tache:</label>
+                <input type="text" id="add_name">   
+            </div>
+            <div>
+                <label>Designation de la tache:</label>
+                <input type="text" id="add_desc">
+            </div>
+            <div>
+                <label>Date de la tache:</label>
+                <input type="date" id="add_date">
+            </div>
+            <button onclick="addTask()">Ajouter</button>
+        </div>
+        <div id="edit">
+            <button onclick="show('null')">Fermer</button>
+            <h2>Edition d'une tache</h2>
+            <label>Nom de la tache</label>
+            <input type="text" id="edit_name" disabled>
+            <label>Designation de la tache</label>
+            <input type="text" id="edit_desc">
+            <label>Date de la tache</label>
+            <input type="date" id="edit_date">
+            <button onclick="editTask()">Editer</button>
+        </div>
+    </div>
+
+    <!-- Corps -->
+    <div class="body">
+        <!-- filtre -->
+        <div class="filter">
+            <input type="search" id="search_task" placeholder="Rechercher une tache par son nom">
+            <button onclick="filterTask()">Filtrer</button>
+        </div>
+        <!-- actions -->
+        <div class="add">
+            <button onclick="show('add')">Ajouter une tache</button>
+        </div>
+        
+        <!-- Todo liste -->
+        <div id="list">
+
+        </div>
+    </div>
+
+    <!-- pied de page -->
+    <div class="footer">
+        Copyrigth TodoApp tous-droits reservé 2024-2025
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>

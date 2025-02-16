@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
+.popup > * {
+    display: none;
+    background-color: rgb(223, 223, 223);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px grey;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: deepskyblue;
+    color: white;
+}
+
+button {
+    transition: 0.5s;
+    background-color:powderblue;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    transition: 0.5s;
+    background-color: rgb(200, 222, 225);
+}
+
+.body {
+    margin: 20px;   
+}
+
+.add {
+    margin: 20px;
+}
+
+div {
+    margin: 10px;
+}
+
+.footer {
+    background-color: rgb(90, 161, 255);
+    padding: 15px;
+    color: white;
+    text-align: center;
+}
+
+input {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#list > div {
+    padding: 20px;
+    background-color: aliceblue;
+    border-radius: 5px;
+    box-shadow: 0 0 10px grey;
+    width: 300px;
+}
