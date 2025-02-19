@@ -6,6 +6,7 @@ C'est une application web permettant la planification de taches .
 - Possibilité de rechercher des taches par leur nom .
 - Possibilité de charger et de sauvegarder une base de taches .
 - Historique des actions .
+- Affichage en popup des formulaires .
 
 ## Règles
 - L'accomplissement d'une tache ne permet plus de l'editer .

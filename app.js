@@ -6,6 +6,7 @@ let listPage = document.querySelector("#list")
 let historyPage = document.querySelector("#history")
 let savePage = document.querySelector("#save")
 let loadPage = document.querySelector("#load")
+let popup = document.querySelector(".popup")
 
 let pages = [addPage,aboutPage,editPage,historyPage,savePage,loadPage]
 
@@ -53,11 +54,13 @@ function Date1SubDate2(d1,d2) { //date1 - date2 pour comparer
 }
 
 function show(id) { //montre une page popup et cache les autres
+  popup.classList.remove("show")
   for (const page of pages) {
     if (page.getAttribute("id") == id) {
-      page.style.display = "block"  
+      page.style.display = "block"
+      popup.classList.add("show")
     }else {
-       page.style.display = "none"
+      page.style.display = "none"
     }
   }
 }
