@@ -83,3 +83,13 @@ input {
     box-shadow: 0 0 10px grey;
     width: 300px;
 }
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pagination > input {
+    width: 50px;
+}

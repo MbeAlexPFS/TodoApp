@@ -84,9 +84,19 @@
             <button onclick="show('add')">Ajouter une tache</button>
         </div>
         
-        <!-- Todo liste -->
+        <!-- liste -->
         <div id="list">
 
+        </div>
+
+        <!-- pagination -->
+        <div class="pagination">
+            <button onclick="paginateToleft()">←</button>
+            <label for="paginatePage">Page:</label>
+            <input type="number" id="paginatePage" disabled value=1>
+            <button onclick="paginateToright()">→</button>
+            <label for="paginateFilterBy">Trier par:</label>
+            <input type="number" id="paginateFilterBy" value=1>
         </div>
     </div>
 

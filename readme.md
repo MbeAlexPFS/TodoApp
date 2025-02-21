@@ -7,12 +7,12 @@ C'est une application web permettant la planification de taches .
 - Possibilité de charger et de sauvegarder une base de taches .
 - Historique des actions .
 - Affichage en popup des formulaires .
+- Système de pagination .
 
 ## Règles
 - L'accomplissement d'une tache ne permet plus de l'editer .
 - La date d'une tache est toujours supérieure à la date de création et d'édition .
 
 ## A venir
-- Création d'un système de pagination .
 - Possibilité d'ordonner les taches .
 - Création d'un tableau de bord .

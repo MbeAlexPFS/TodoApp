@@ -6,6 +6,8 @@ let listPage = document.querySelector("#list")
 let historyPage = document.querySelector("#history")
 let savePage = document.querySelector("#save")
 let loadPage = document.querySelector("#load")
+let paginatePage = document.querySelector("#paginatePage")
+let paginateFilterBy = document.querySelector("#paginateFilterBy")
 let popup = document.querySelector(".popup")
 
 let pages = [addPage,aboutPage,editPage,historyPage,savePage,loadPage]
@@ -13,14 +15,16 @@ let pages = [addPage,aboutPage,editPage,historyPage,savePage,loadPage]
 let ids = 0 //id global
 let aid = 0 //id utilisé pour les traitements
 let actual_date = (new Date).toISOString().split("T")[0].split("-").reverse().join("-") // jj-mm-aaaa
+let current_page = 1 //page actuelle de la pagination
+let filter_by = 1 //nombre de taches par page
 
 let act = [
   // ajout de ... ,
 ]
 
 let task = [
-  /*Exemple de données tache{
-    "id" : 0
+  /*Exemple de données tache:{
+    "id" : 0,
     "name" : "exemple",
     "desc" : "exemple de tache",
     "date" : "11-10-2024",
@@ -40,6 +44,42 @@ updateHistory()
 filterTask()
 
 //Fonction
+function paginateToleft() { // vers la page precedente
+  if (current_page > 1) {
+    current_page -= 1
+    paginatePage.value = current_page
+  }
+  filterTask()
+}
+
+function paginateToright() { // vers la page precedente
+  if (current_page < Math.ceil(filtered_task.length/filter_by)) {
+    current_page += 1
+    paginatePage.value = current_page
+  }
+  filterTask()
+}
+
+paginatePage.oninput = ()=> { // met à jour la page actuelle
+  if (paginatePage.value > 0 && paginatePage.value < Math.ceil(filtered_task.length/filter_by)) {
+    current_page = paginatePage.value  
+  }else {
+    paginatePage.value = current_page
+  }
+  filterTask()
+}
+
+paginateFilterBy.oninput = ()=> { // met à jour le nombre de taches dans une page
+  if (paginateFilterBy.value > 0 && paginateFilterBy.value < filtered_task.length + 1) {
+    filter_by = paginateFilterBy.value
+    paginatePage.value = 1
+    current_page = 1
+  }else {
+    paginateFilterBy.value = filter_by
+  }
+  filterTask()
+}
+
 function downloadObjectAsJson(exportObj, exportName){ //basé sur un code javascript importé pour telecharger une base json
   var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
   var downloadAnchorNode = document.createElement('a');
@@ -106,7 +146,6 @@ document.getElementById('load_task').addEventListener('change', function(event) 
                 act = jsonContent.act
                 act.push("Chargement de la base de tache "+jsonContent.name+" le " + actual_date + " .")
                 updateHistory()
-                updateList()
                 filterTask()
               }
               // You can now work with the JSON content
@@ -222,34 +261,39 @@ function deleteTask(id) { //complète une tache
 }
 
 function updateList() {
+  let index = 0
+  let part = Math.ceil(filtered_task.length/(filtered_task.length/filter_by)) // division du nombre de taches
   listPage.innerHTML = `` //reset
   if (task.length > 0) {
     for (const tsk of filtered_task) {
-      let statut = ""
-      let disabled = ""
-      if (tsk.completed_at == "") {
-        if (Date1SubDate2(tsk.date,actual_date) <= 0) {
-          statut = "Passé"
-        }else if (Date1SubDate2(tsk.date,actual_date) == 0) {
-          statut = "En cours"
+      if (index > (part*(current_page-1)) - 1 && index < (part*current_page)) {
+        let statut = ""
+        let disabled = ""
+        if (tsk.completed_at == "") {
+          if (Date1SubDate2(tsk.date,actual_date) <= 0) {
+            statut = "Passé"
+          }else if (Date1SubDate2(tsk.date,actual_date) == 0) {
+            statut = "En cours"
+          }else {
+            statut = "A venir"
+          }
         }else {
-          statut = "A venir"
+          statut = "complèté"
+          disabled = "disabled"
         }
-      }else {
-        statut = "complèté"
-        disabled = "disabled"
+        listPage.innerHTML += 
+        `<div>
+          <h2>${ statut }</h2>
+          <h3>${ tsk.name }</h3>
+          <p>${ tsk.desc }</p>
+          <h4>${ tsk.date }</h4>
+          <p>${ tsk.created_at }</p>
+          <button onclick="editTaskForm(${tsk.id})" ${disabled}>Editer</button>
+          <button onclick="endTask(${tsk.id})" ${disabled}>Accomplir</button>
+          <button onclick="deleteTask(${tsk.id})">Enlever</button>
+        <div>`   
       }
-      listPage.innerHTML += 
-      `<div>
-        <h2>${ statut }</h2>
-        <h3>${ tsk.name }</h3>
-        <p>${ tsk.desc }</p>
-        <h4>${ tsk.date }</h4>
-        <p>${ tsk.created_at }</p>
-        <button onclick="editTaskForm(${tsk.id})" ${disabled}>Editer</button>
-        <button onclick="endTask(${tsk.id})" ${disabled}>Accomplir</button>
-        <button onclick="deleteTask(${tsk.id})">Enlever</button>
-      <div>`
+      index ++
     }
   }else {
     listPage.innerHTML += `<div><h2>Aucune tache n'a été planifiée</h2></div>`  
