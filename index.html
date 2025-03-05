@@ -8,8 +8,14 @@
 </head>
 <body>
     <!-- en tête -->
-    <nav>
-        <h3>TodoApp</h3>
+    <nav class="no-drop">
+        <div>
+            <h3>TodoApp</h3>
+            <div class="dropbtns">
+                <button onclick="dropOrNo()"><img src="menu-100.png" alt=""></button>
+                <button onclick="dropOrNo()"><img src="cross-100.png" alt=""></button>
+            </div>
+        </div>
         <div>
             <button onclick="show('load')">Charger</button>
             <button onclick="show('save')">Sauvegarder</button>

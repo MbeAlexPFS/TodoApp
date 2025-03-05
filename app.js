@@ -44,6 +44,15 @@ updateHistory()
 filterTask()
 
 //Fonction
+function dropOrNo() { //etend ou ferme la barre de navigation
+  let nav = document.querySelector('nav')
+  if (nav.classList.contains('no-drop')) {
+    nav.classList.replace('no-drop','drop')
+  }else{
+    nav.classList.replace('drop','no-drop')
+  }
+}
+
 function paginateToleft() { // vers la page precedente
   if (current_page > 1) {
     current_page -= 1

@@ -93,3 +93,58 @@ input {
 .pagination > input {
     width: 50px;
 }
+
+.dropbtns {
+    display: none;
+}
+
+.dropbtns img {
+    width: 30px;
+}
+
+.no-drop .dropbtns button:nth-child(2) {
+    display: none;
+}
+
+.drop .dropbtns button:nth-child(1) {
+    display: none;
+}
+
+@media screen and (max-width: 720px) {
+    .dropbtns {
+        display: initial;
+    }
+
+    nav > div:nth-child(2) {
+        display: flex;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .no-drop > div:nth-child(2) {
+        height: 0px;
+        transition: 1s;
+    }
+
+    .drop > div:nth-child(2) {
+        height: 200px;
+        transition: 1s;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+    }
+
+    nav  div:nth-child(1) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+}
